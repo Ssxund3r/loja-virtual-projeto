@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity 
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter implements HttpSessionListener {
 	
@@ -21,5 +21,4 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter implements H
 			//.antMatchers(HttpMethod.DELETE, "/deleteAcessoPorId/{id}");
 			//Ignorando URL no momento para nao autenticar
 	}
-	
 }

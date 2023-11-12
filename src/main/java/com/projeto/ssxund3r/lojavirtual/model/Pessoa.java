@@ -27,6 +27,9 @@ public abstract class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pessoa")
 	private Long id;
 	
+	@Column(name= "tipo_pessoa")
+	private String tipoPessoa;
+	
 	@Column(name = "nome_pess", nullable = false)
 	private String nome;
 	
@@ -53,6 +56,14 @@ public abstract class Pessoa implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public void setTipoPessoa(String tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
+	}
+	
+	public String getTipoPessoa() {
+		return tipoPessoa;
 	}
 
 	public String getNome() {
