@@ -36,74 +36,40 @@ public class Usuario implements UserDetails {
 	@Column(name = "id_usuario")
 	private Long id;
 	
-	@Column(name="login_usu", nullable = false)
+	@Column(name="login", nullable = false)
 	private String login;
 	
-	@Column(name="senha_usu", nullable = false)
+	@Column(name="senha", nullable = false)
 	private String senha;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="data_atual_senha_usu")
+	@Column(name="data_atual_senha")
 	private Date dataAtualSenha;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuarios_acesso", uniqueConstraints = @UniqueConstraint(columnNames = {"id_usuario", "id_acesso"} , 
-	name = "unique_acesso_user"), 
+	name = "unique_acesso_user"),
+	
 	joinColumns = @JoinColumn(name ="id_usuario", referencedColumnName = "id_usuario", table = "usuario", 
 	unique = false, foreignKey = @ForeignKey(name = "fk_usuario", value = ConstraintMode.CONSTRAINT)),
+	
 	inverseJoinColumns = @JoinColumn(name = "id_acesso", unique = false, referencedColumnName = "id_acesso", table = "acesso",
 	foreignKey = @ForeignKey(name = "fk_acesso", value = ConstraintMode.CONSTRAINT)))
 	private List<Acesso> acessos;
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = Pessoa.class)
 	@JoinColumn(name="id_pessoa", nullable = false, 
 	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_pessoa"))
 	private Pessoa pessoa;
 	
-	/*Autoridades = São os acessos, ou seja ROLE_ADMIN, ROLE_SECRETARIO, ROLE_FINANCEIRO*/
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.acessos;
-	}
-
-	@Override
-	public String getPassword() {
-		return this.senha;
-	}
-
-	@Override
-	public String getUsername() {
-		return this.login;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 	
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
 	
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -143,5 +109,41 @@ public class Usuario implements UserDetails {
 	public void setAcessos(List<Acesso> acessos) {
 		this.acessos = acessos;
 	}
-	
+
+	/*Autoridades = São os acesso, ou seja ROLE_ADMIN, ROLE_SECRETARIO, ROLE_FINACEIRO*/
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return this.acessos;
+	}
+
+	@Override
+	public String getPassword() {
+		return this.senha;
+	}
+
+	@Override
+	public String getUsername() {
+		return this.login;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }

@@ -13,48 +13,44 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.projeto.ssxund3r.lojavirtual.model.Usuario;
 
 public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	
-	//Configurando o gerenciamento de autenticacao
+	/*Confgurando o gerenciado de autenticacao*/
 	public JWTLoginFilter(String url, AuthenticationManager authenticationManager) {
-		//Obriga a autenticar URL
+	
+		/*Ibriga a autenticat a url*/
 		super(new AntPathRequestMatcher(url));
 		
-		//Gerenciador de autenticacao
+		/*Gerenciador de autenticao*/
 		setAuthenticationManager(authenticationManager);
+		
 	}
 	
-	protected JWTLoginFilter(RequestMatcher requiresAuthenticationRequestMatcher) {
-		super(requiresAuthenticationRequestMatcher);
-	}
-	
-	//Retorna o usuário ao processar a autenticação 
+	/*Retorna o usuário ao processr a autenticacao*/
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException, IOException, ServletException {
+		/*Obter o usuário*/
+		Usuario user = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
 		
-		Usuario usuario = new ObjectMapper().readValue(request.getInputStream(), Usuario.class);
-		
-		return getAuthenticationManager()
-				.authenticate(
-						new UsernamePasswordAuthenticationToken(
-								usuario.getLogin(), usuario.getSenha()));
+		/*Retorna o user com login e senha*/
+		return getAuthenticationManager().
+				authenticate(new UsernamePasswordAuthenticationToken(user.getLogin(), user.getSenha()));
 	}
 	
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
+
 		try {
-			new JWTTokenAutenticacaoService()
-				.addAuthentication(response, authResult.getName());
+			new JWTTokenAutenticacaoService().addAuthentication(response, authResult.getName());
 			
 		} catch (Exception e) {
-			e.printStackTrace();	
+			e.printStackTrace();
 		}
 	}
 }

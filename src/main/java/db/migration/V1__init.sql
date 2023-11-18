@@ -507,9 +507,9 @@ ALTER TABLE public.status_rastreio OWNER TO postgres;
 
 CREATE TABLE public.usuario (
     id_usuario bigint NOT NULL,
-    data_atual_senha_usu date,
-    login_usu character varying(255) NOT NULL,
-    senha_usu character varying(255) NOT NULL,
+    data_atual_senha date,
+    login character varying(255) NOT NULL,
+    senha character varying(255) NOT NULL,
     id_pessoa bigint NOT NULL
 );
 

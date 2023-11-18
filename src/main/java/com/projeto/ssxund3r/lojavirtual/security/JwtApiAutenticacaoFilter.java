@@ -16,22 +16,22 @@ import org.springframework.web.filter.GenericFilterBean;
 /*
  * Filtro onde todas as requisicoes serao capturadas para autenticar
  */
-public class JwtApiAutenticacaoFilter extends GenericFilterBean{
+public class JwtApiAutenticacaoFilter extends GenericFilterBean {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
-		//Estabelece a autenticacao do user
-		Authentication authentication = new JWTTokenAutenticacaoService()
-				.getAuthentication(
-						(HttpServletRequest)  request, 
-						(HttpServletResponse) response);
+		/*Estabele a autenticao do user*/
 		
-		//Colocar o processo de autenticacao para o spring security
+		Authentication authentication = new JWTTokenAutenticacaoService().
+				getAuthetication((HttpServletRequest) request, (HttpServletResponse) response);
+		
+		/*Coloca o processo de autenticacao para o spring secutiry*/
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		chain.doFilter(request, response);
+		
 	}
 	
 }
