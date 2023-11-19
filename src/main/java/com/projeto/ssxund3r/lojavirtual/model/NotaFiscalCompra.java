@@ -27,39 +27,36 @@ public class NotaFiscalCompra implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_nota_fiscal_compra")
-	@Column(name = "id_nota_fiscal_compra")
 	private Long id;
 	
-	@Column(name="numero_nota", nullable = false)
+	@Column(nullable = false)
 	private String numeroNota;
 	
-	@Column(name="serie_nota", nullable = false)
+	@Column(nullable = false)
 	private String serieNota;
 	
-	@Column(name="descricao_observacao")
 	private String descricaoObs;
 	
-	@Column(name="valor_total", nullable = false)
+	@Column(nullable = false)
 	private BigDecimal valorTotal;
 	
-	@Column(name="valor_desconto")
 	private BigDecimal valorDesconto;
 	
-	@Column(name="valor_icms", nullable = false)
+	@Column(nullable = false)
 	private BigDecimal valorIcms;
 	
-	@Column(name="data_compra", nullable = false)
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataCompra;
 	
-	@ManyToOne
-	@JoinColumn(name="id_pessoa", nullable = false, 
-	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_pessoa"))
+	@ManyToOne(targetEntity = Pessoa.class)
+	@JoinColumn(name = "pessoa_id", nullable = false, 
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
 	private Pessoa pessoa;
 	
 	@ManyToOne
-	@JoinColumn(name="id_conta_pagar", nullable = false, 
-	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_conta_pagar"))
+	@JoinColumn(name = "conta_pagar_id", nullable = false, 
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "conta_pagar_fk"))
 	private ContaPagar contaPagar;
 	
 	public Long getId() {

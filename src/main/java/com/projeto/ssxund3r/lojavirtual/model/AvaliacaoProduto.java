@@ -23,23 +23,22 @@ public class AvaliacaoProduto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_avaliacao_produto")
-	@Column(name = "id_avaliacao_produto")
 	private Long id;
 
-	@Column(name = "nota_avaliacao_produto", nullable = false)
+	@Column(nullable = false)
 	private Integer nota;
 
-	@Column(name = "descricao_avaliacao_produto", nullable = false)
+	@Column(nullable = false)
 	private String descricao;
 
 	@ManyToOne(targetEntity = Pessoa.class)
-	@JoinColumn(name = "id_pessoa", nullable = false, 
-	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_pessoa"))
+	@JoinColumn(name = "pessoa_id", nullable = false, 
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
 	private Pessoa pessoa;
 
 	@ManyToOne
-	@JoinColumn(name = "id_produto", nullable = false, 
-	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_produto"))
+	@JoinColumn(name = "produto_id", nullable = false, 
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
 	private Produto produto;
 
 	public Long getId() {

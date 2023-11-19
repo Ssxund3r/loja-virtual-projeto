@@ -2,7 +2,6 @@ package com.projeto.ssxund3r.lojavirtual.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -23,24 +22,20 @@ public class StatusRastreio implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_status_rastreio")
-	@Column(name = "id_status_rastreio")
 	private Long id;
 
-	@Column(name = "centro_distribuicao_rastreio")
 	private String centroDistribuicao;
 
-	@Column(name = "cidade_rastreio")
 	private String cidade;
 
-	@Column(name = "estado_rastreio")
 	private String estado;
 
-	@Column(name = "status_rastreio")
 	private String status;
 
 	@ManyToOne
-	@JoinColumn(name = "id_venda_compra_loja_virtual", nullable = false, 
-	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_venda_compra_loja_virtual"))
+	@JoinColumn(name = "venda_compra_loja_virt_id", nullable = false, 
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, 
+	name = "venda_compra_loja_virt_fk"))
 	private VendaCompraLojaVirtual vendaCompraLojaVirtual;
 	
 	public Long getId() {

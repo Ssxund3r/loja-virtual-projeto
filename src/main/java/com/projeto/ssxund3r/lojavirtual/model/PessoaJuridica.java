@@ -12,22 +12,20 @@ public class PessoaJuridica extends Pessoa {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name="cnpj_pessoa_juridica", nullable = false)
+	@Column(nullable = false)
 	private String cnpj;
 	
-	@Column(name="inscricao_estadual", nullable = false)
+	@Column(nullable = false)
 	private String inscEstadual;
 	
-	@Column(name="inscricao_municipal")
 	private String inscMunicipal;
 	
-	@Column(name="nome_fantasia", nullable = false)
+	@Column(nullable = false)
 	private String nomeFantasia;
 	
-	@Column(name="razao_social", nullable = false)
+	@Column(nullable = false)
 	private String razaoSocial;
 	
-	@Column(name="categoria")
 	private String categoria;
 
 	public String getCnpj() {

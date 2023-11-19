@@ -23,18 +23,17 @@ public class ImagemProduto implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_imagem_produto")
-	@Column(name = "id_imagem_produto")
 	private Long id;
-	
-	@Column(name="imagem_original_produto", columnDefinition = "text", nullable = false)
+
+	@Column(columnDefinition = "text", nullable = false)
 	private String imagemOriginal;
-	
-	@Column(name="imagem_miniatura_produto", columnDefinition = "text", nullable = false)
+
+	@Column(columnDefinition = "text", nullable = false)
 	private String imagemMiniatura;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_produto", nullable = false, 
-	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_produto"))
+	@JoinColumn(name = "produto_id", nullable = false,
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
 	private Produto produto;
 
 	public Long getId() {

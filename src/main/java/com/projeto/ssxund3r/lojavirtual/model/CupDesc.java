@@ -22,21 +22,18 @@ public class CupDesc implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cupom_desconto")
-	@Column(name = "id_cupom_desconto")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cup_desc")
 	private Long id;
-	
-	@Column(name="codigo_descricao", nullable = false)
+
+	@Column(nullable = false)
 	private String codDesc;
-	
-	@Column(name="valor_real_desconto")
+
 	private BigDecimal valorRealDesc;
-	
-	@Column(name="valor_porcentagem_desconto")
+
 	private BigDecimal valorPorcentDesc;
-	
+
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	@Column(name="data_validade_cupom", nullable = false)
 	private Date dataValidadeCupom;
 
 	public Long getId() {

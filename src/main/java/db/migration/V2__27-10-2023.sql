@@ -1,7 +1,0 @@
-SELECT CONSTRAINT_NAME 
- FROM INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE 
- WHERE TABLE_NAME = 'usuarios_acesso' 
- AND COLUMN_NAME = 'id_acesso' 
- AND CONSTRAINT_NAME <> 'unique_acesso_user';
- 
-ALTER TABLE usuarios_acesso DROP CONSTRAINT "uk_8i2xo8dshlxpfclqasqaan41";

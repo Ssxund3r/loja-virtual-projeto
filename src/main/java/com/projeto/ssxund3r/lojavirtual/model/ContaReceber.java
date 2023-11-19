@@ -32,33 +32,32 @@ public class ContaReceber implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_conta_receber")
-	@Column(name = "id_conta_receber")
 	private Long id;
 
-	@ManyToOne(targetEntity = Pessoa.class)
-	@JoinColumn(name = "id_pessoa", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_pessoa"))
-	private Pessoa pessoa;
-	
-	@Column(name="descricao_conta_receber", nullable = false)
+	@Column(nullable = false)
 	private String descricao;
 
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	@Column(name="status_conta_receber")
 	private StatusContaReceber status;
 
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	@Column(name="data_vencimento", nullable = false)
 	private Date dtVencimento;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="data_pagamento", nullable = false)
 	private Date dtPagamento;
-	
-	@Column(name="valor_total")
+
+	@Column(nullable = false)
 	private BigDecimal valorTotal;
+
 	
-	@Column(name="valor_desconto")
 	private BigDecimal valorDesconto;
+
+	@ManyToOne(targetEntity = Pessoa.class)
+	@JoinColumn(name = "pessoa_id", nullable = false, 
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
+	private Pessoa pessoa;
 
 	public Long getId() {
 		return id;

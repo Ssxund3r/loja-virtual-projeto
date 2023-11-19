@@ -27,60 +27,58 @@ public class VendaCompraLojaVirtual implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id_venda_compra_loja_virtual")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_venda_compra_loja_virtual")
-	private Long Id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_vd_cp_loja_virt")
+	private Long id;
 
 	@ManyToOne(targetEntity = Pessoa.class)
-	@JoinColumn(name = "id_pessoa", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_pessoa"))
+	@JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
 	private Pessoa pessoa;
 
 	@ManyToOne
-	@JoinColumn(name = "id_endereco_entrega", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_endereco_entrega"))
+	@JoinColumn(name = "endereco_entrega_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "endereco_entrega_fk"))
 	private Endereco enderecoEntrega;
 
 	@ManyToOne
-	@JoinColumn(name = "id_endereco_cobranca", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_endereco_cobranca"))
+	@JoinColumn(name = "endereco_cobranca_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "endereco_cobranca_fk"))
 	private Endereco enderecoCobranca;
 
-	@Column(name = "valor_total_vd_cp_lj_vt", nullable = false)
+	@Column(nullable = false)
 	private BigDecimal valorTotal;
 
-	@Column(name = "valor_desconto_vd_cp_lj_vt")
 	private BigDecimal valorDesconto;
 
 	@ManyToOne
-	@JoinColumn(name = "id_forma_pagamento", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_forma_pagamento"))
+	@JoinColumn(name = "forma_pagamento_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "forma_pagamento_fk"))
 	private FormaPagamento formaPagamento;
 
 	@OneToOne
-	@JoinColumn(name = "id_nota_fiscal_venda", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_nota_fiscal_venda"))
+	@JoinColumn(name = "nota_fiscal_venda_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "nota_fiscal_venda_fk"))
 	private NotaFiscalVenda notaFiscalVenda;
 
 	@ManyToOne
-	@JoinColumn(name = "id_cupom_desconto", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_cupom_desconto"))
+	@JoinColumn(name = "cupom_desc_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "cupom_desc_fk"))
 	private CupDesc cupDesc;
 
-	@Column(name = "valor_frete", nullable = false)
-	private BigDecimal valorFrete;
+	@Column(nullable = false)
+	private BigDecimal valorFret;
 
-	@Column(name = "dia_entrega", nullable = false)
+	@Column(nullable = false)
 	private Integer diaEntrega;
 
-	@Column(name = "data_venda", nullable = false)
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataVenda;
 
-	@Column(name = "data_entrega", nullable = false)
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataEntrega;
-	
+
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public Pessoa getPessoa() {
@@ -147,12 +145,12 @@ public class VendaCompraLojaVirtual implements Serializable {
 		this.cupDesc = cupDesc;
 	}
 
-	public BigDecimal getValorFrete() {
-		return valorFrete;
+	public BigDecimal getValorFret() {
+		return valorFret;
 	}
 
-	public void setValorFrete(BigDecimal valorFrete) {
-		this.valorFrete = valorFrete;
+	public void setValorFret(BigDecimal valorFret) {
+		this.valorFret = valorFret;
 	}
 
 	public Integer getDiaEntrega() {
@@ -183,7 +181,7 @@ public class VendaCompraLojaVirtual implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -196,12 +194,12 @@ public class VendaCompraLojaVirtual implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		VendaCompraLojaVirtual other = (VendaCompraLojaVirtual) obj;
-		if (Id == null) {
-			if (other.Id != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!Id.equals(other.Id))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-
+	
 }

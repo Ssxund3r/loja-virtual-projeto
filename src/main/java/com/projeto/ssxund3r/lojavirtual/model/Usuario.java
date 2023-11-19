@@ -33,35 +33,36 @@ public class Usuario implements UserDetails {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
-	@Column(name = "id_usuario")
 	private Long id;
 	
-	@Column(name="login", nullable = false)
+	@Column(nullable = false)
 	private String login;
 	
-	@Column(name="senha", nullable = false)
+	@Column(nullable = false)
 	private String senha;
 	
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
-	@Column(name="data_atual_senha")
 	private Date dataAtualSenha;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "usuarios_acesso", uniqueConstraints = @UniqueConstraint(columnNames = {"id_usuario", "id_acesso"} , 
-	name = "unique_acesso_user"),
-	
-	joinColumns = @JoinColumn(name ="id_usuario", referencedColumnName = "id_usuario", table = "usuario", 
-	unique = false, foreignKey = @ForeignKey(name = "fk_usuario", value = ConstraintMode.CONSTRAINT)),
-	
-	inverseJoinColumns = @JoinColumn(name = "id_acesso", unique = false, referencedColumnName = "id_acesso", table = "acesso",
-	foreignKey = @ForeignKey(name = "fk_acesso", value = ConstraintMode.CONSTRAINT)))
-	private List<Acesso> acessos;
-	
 	@ManyToOne(targetEntity = Pessoa.class)
-	@JoinColumn(name="id_pessoa", nullable = false, 
-	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_pessoa"))
+	@JoinColumn(name = "pessoa_id", nullable = false, 
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
 	private Pessoa pessoa;
 	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "usuarios_acesso", 
+		uniqueConstraints = @UniqueConstraint (columnNames = {"usuario_id", "acesso_id"} ,
+		name = "unique_acesso_user"),
+	
+	   joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id", table = "usuario", 
+	   unique = false, foreignKey = @ForeignKey(name = "usuario_fk", value = ConstraintMode.CONSTRAINT)), 
+	   
+	inverseJoinColumns = @JoinColumn(name = "acesso_id", 
+						unique = false, referencedColumnName = "id", table = "acesso",
+						foreignKey = @ForeignKey(name = "aesso_fk", value = ConstraintMode.CONSTRAINT)))
+	private List<Acesso> acessos;
+
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
@@ -112,8 +113,7 @@ public class Usuario implements UserDetails {
 
 	/*Autoridades = São os acesso, ou seja ROLE_ADMIN, ROLE_SECRETARIO, ROLE_FINACEIRO*/
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
+	public Collection<? extends GrantedAuthority> getAuthorities() {	
 		return this.acessos;
 	}
 

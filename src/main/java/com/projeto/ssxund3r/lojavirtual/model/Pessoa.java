@@ -26,20 +26,21 @@ public abstract class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pessoa")
 	private Long id;
-	
-	@Column(name= "tipo_pessoa")
-	private String tipoPessoa;
-	
-	@Column(name = "nome_pess", nullable = false)
-	private String nome;
-	
-	@Column(name="email_pess", nullable = false)
-	private String email;
-	
-	@Column(name="telefone_pess", nullable = false)
-	private String telefone;
 
-	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@Column(nullable = false)
+	private String nome;
+
+	@Column(nullable = false)
+	private String email;
+
+	@Column(nullable = false)
+	private String telefone;
+	
+	@Column
+	private String tipoPessoa; 
+	
+	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, 
+			cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Endereco> enderecos = new ArrayList<Endereco>();
 
 	public void setEnderecos(List<Endereco> enderecos) {

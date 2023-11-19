@@ -22,20 +22,21 @@ public class NotaItemProduto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id_nota_item_produto")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_nota_item_produto")
 	private Long id;
 
-	@Column(name = "qtd_nota_item_produto", nullable = false)
+	@Column(nullable = false)
 	private Double quantidade;
 
 	@ManyToOne
-	@JoinColumn(name = "id_produto", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_produto"))
-	private Produto produto;
+	@JoinColumn(name = "nota_fiscal_compra_id", nullable = false, 
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "nota_fiscal_compra_fk"))
+	private NotaFiscalCompra notaFiscalCompra;
 
 	@ManyToOne
-	@JoinColumn(name = "id_nota_fiscal_compra", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_nota_fiscal_compra"))
-	private NotaFiscalCompra notaFiscalCompra;
+	@JoinColumn(name = "produto_id", nullable = false, 
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "produto_fk"))
+	private Produto produto;
 
 	public Long getId() {
 		return id;

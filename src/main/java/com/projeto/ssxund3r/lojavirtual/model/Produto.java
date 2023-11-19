@@ -20,50 +20,46 @@ public class Produto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_produto")
-	@Column(name = "id_produto")
 	private Long id;
 
-	@Column(name = "tipo_unidade", nullable = false)
+	@Column(nullable = false)
 	private String tipoUnidade;
 
-	@Column(name = "nome_produto", nullable = false)
+	@Column(nullable = false)
 	private String nome;
-
-	@Column(name = "descricao_produto", columnDefinition = "text", length = 2000, nullable = false)
+	
+	@Column(nullable = false)
+	private Boolean ativo = Boolean.TRUE;
+	
+	@Column(columnDefinition = "text", length = 2000, nullable = false)
 	private String descricao;
 
-	@Column(name = "status_ativo", nullable = false)
-	private Boolean ativo = Boolean.TRUE;
+	/** Nota item nota produto - ASSOCIAR **/
 
-	/* Nota ITEM PRODUTO - ASSOCIAR */
-	
-	
-	
-	@Column(name = "largura_produto",nullable = false)
+	@Column(nullable = false)
+	private Double peso; /* 1000.55 G */
+
+	@Column(nullable = false)
 	private Double largura;
 
-	@Column(name = "altura_produto", nullable = false)
+	@Column(nullable = false)
 	private Double altura;
 
-	@Column(name = "profundidade_produto", nullable = false)
+	@Column(nullable = false)
 	private Double profundidade;
 
-	@Column(name = "valor_venda", nullable = false)
+	@Column(nullable = false)
 	private BigDecimal valorVenda = BigDecimal.ZERO;
 
-	@Column(name = "qtd_estoque", nullable = false)
-	private Integer qtdEstoque = 0;
+	@Column(nullable = false)
+	private Integer QtdEstoque = 0;
 
-	@Column(name = "qtd_alerta_estoque")
-	private Integer qtdAltertaEstoque = 0;
+	private Integer QtdeAlertaEstoque = 0;
 
-	@Column(name = "link_youtube")
 	private String linkYoutube;
 
-	@Column(name = "alerta_qtd_estoque")
 	private Boolean alertaQtdeEstoque = Boolean.FALSE;
 
-	@Column(name = "qtd_clique_produto")
 	private Integer qtdeClique = 0;
 
 	public Long getId() {
@@ -90,12 +86,28 @@ public class Produto implements Serializable {
 		this.nome = nome;
 	}
 
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Double peso) {
+		this.peso = peso;
 	}
 
 	public Double getLargura() {
@@ -131,19 +143,19 @@ public class Produto implements Serializable {
 	}
 
 	public Integer getQtdEstoque() {
-		return qtdEstoque;
+		return QtdEstoque;
 	}
 
 	public void setQtdEstoque(Integer qtdEstoque) {
-		this.qtdEstoque = qtdEstoque;
+		QtdEstoque = qtdEstoque;
 	}
 
-	public Integer getQtdAltertaEstoque() {
-		return qtdAltertaEstoque;
+	public Integer getQtdeAlertaEstoque() {
+		return QtdeAlertaEstoque;
 	}
 
-	public void setQtdAltertaEstoque(Integer qtdAltertaEstoque) {
-		this.qtdAltertaEstoque = qtdAltertaEstoque;
+	public void setQtdeAlertaEstoque(Integer qtdeAlertaEstoque) {
+		QtdeAlertaEstoque = qtdeAlertaEstoque;
 	}
 
 	public String getLinkYoutube() {
@@ -168,14 +180,6 @@ public class Produto implements Serializable {
 
 	public void setQtdeClique(Integer qtdeClique) {
 		this.qtdeClique = qtdeClique;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	@Override

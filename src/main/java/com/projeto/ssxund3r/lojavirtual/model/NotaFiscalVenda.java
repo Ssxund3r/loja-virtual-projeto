@@ -22,36 +22,37 @@ public class NotaFiscalVenda implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id_nota_fiscal_venda")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_nota_fiscal_venda")
-	private Long Id;
+	private Long id;
 
-	@Column(name = "numero_nota_fiscal_venda", nullable = false)
+	@Column(nullable = false)
 	private String numero;
 
-	@Column(name = "serie_nota_fiscal_venda", nullable = false)
+	@Column(nullable = false)
 	private String serie;
 
-	@Column(name = "tipo_nota_fiscal_venda", nullable = false)
+	@Column(nullable = false)
 	private String tipo;
 
-	@Column(name = "xml", columnDefinition = "text", nullable = false)
+	
+	@Column(columnDefinition = "text", nullable = false)
 	private String xml;
 
-	@Column(name = "pdf", columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text", nullable = false)
 	private String pdf;
-
+	
 	@OneToOne
-	@JoinColumn(name = "id_venda_compra_loja_virtual", nullable = false, 
-	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "fk_venda_compra_loja_virtual"))
+	@JoinColumn(name = "venda_compra_loja_virt_id", nullable = false, 
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "venda_compra_loja_virt_fk"))
 	private VendaCompraLojaVirtual vendaCompraLojaVirtual;
 
+	
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getNumero() {
@@ -106,7 +107,7 @@ public class NotaFiscalVenda implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -119,11 +120,12 @@ public class NotaFiscalVenda implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		NotaFiscalVenda other = (NotaFiscalVenda) obj;
-		if (Id == null) {
-			if (other.Id != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!Id.equals(other.Id))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+	
 }
