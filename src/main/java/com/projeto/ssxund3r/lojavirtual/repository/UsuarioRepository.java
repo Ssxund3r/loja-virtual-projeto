@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.projeto.ssxund3r.lojavirtual.model.Usuario;
 
 @Repository
-public interface UsuarioRepository extends CrudRepository<Usuario, Long>{
+public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 	
-	@Query(value = "select u from Usuario u where u.login = ?1")
+	@Query("select u from Usuario u where u.login = ?1")
 	Usuario findUserByLogin(String login);
+
 }

@@ -51,14 +51,6 @@ public class ControleExcecoes extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<Object>(objetoErroDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ExceptionHandler(NullPointerException.class)
-	protected ResponseEntity<Object> handleNullPointerException(NullPointerException ex, WebRequest request) {
-		ObjetoErroDTO objetoErroDTO = new ObjetoErroDTO();
-		objetoErroDTO.setError("Uma exceção de NullPointerException ocorreu");
-		return new ResponseEntity<Object>(objetoErroDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-	
-	
 	/*Captura erro na parte de banco*/
 	@ExceptionHandler({DataIntegrityViolationException.class, 
 			ConstraintViolationException.class, SQLException.class})

@@ -20,8 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "venda_compra_loja_virtual")
-@SequenceGenerator(name = "seq_venda_compra_loja_virtual", sequenceName = "seq_venda_compra_loja_virtual", allocationSize = 1, initialValue = 1)
+@Table(name = "vd_cp_loja_virt")
+@SequenceGenerator(name = "seq_vd_cp_loja_virtl", sequenceName = "seq_vd_cp_loja_virt", allocationSize = 1, initialValue = 1)
 public class VendaCompraLojaVirtual implements Serializable {
 
 	private static final long serialVersionUID = 1L;

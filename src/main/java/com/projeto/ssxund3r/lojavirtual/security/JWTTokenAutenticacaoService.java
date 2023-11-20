@@ -50,7 +50,7 @@ public class JWTTokenAutenticacaoService {
 		response.addHeader(HEADER_STRING, token);
 		
 		liberacaoCors(response);
-		
+
 		/*Usado para ver no Postman para teste*/
 		response.getWriter().write("{\"Authorization\": \""+token+"\"}");
 		
@@ -80,10 +80,11 @@ public class JWTTokenAutenticacaoService {
 						getApplicationContext()
 						.getBean(UsuarioRepository.class)
 						.findUserByLogin(user);
-				
+			
 				if (usuario != null) {
-					  return new UsernamePasswordAuthenticationToken( usuario.getLogin(),
-					  usuario.getSenha(), usuario.getAuthorities());
+					
+						  return new UsernamePasswordAuthenticationToken( usuario.getLogin(),
+								  usuario.getSenha(), usuario.getAuthorities());		  
 				}
 				
 			}

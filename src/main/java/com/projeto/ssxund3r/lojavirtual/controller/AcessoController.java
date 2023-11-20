@@ -32,7 +32,7 @@ public class AcessoController {
 	@ResponseBody // Poder dar um retorno da API
 	public ResponseEntity<Acesso> salvarAcesso(@RequestBody Acesso acesso) { // Recebe o JSON e converte para objeto
 		
-		Acesso acessoSalvo = acessoService.save(acesso);
+		Acesso acessoSalvo = acessoRepository.save(acesso);
 
 		return new ResponseEntity<Acesso>(acessoSalvo, HttpStatus.OK);
 	}

@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.stereotype.Component;
 
 import com.projeto.ssxund3r.lojavirtual.service.ImplementacaoUserDetailsService;
 
@@ -55,13 +56,17 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter implements H
 
 	}
 
-	/* Ignora alguas URL livre de autenticação */
-	/*
-	 * @Override public void configure(WebSecurity web) throws Exception {
-	 * 
-	 * web.ignoring().antMatchers(HttpMethod.GET, "/salvarAcesso", "/deleteAcesso")
-	 * .antMatchers(HttpMethod.POST, "/salvarAcesso", "/deleteAcesso");
-	 * 
-	 * Ingnorando URL no momento para nao autenticar }
-	 */
+	// Ignora alguas URL livre de autenticação
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+
+		/*
+		 * web.ignoring().antMatchers(HttpMethod.GET, "/salvarAcesso", "/deleteAcesso")
+		 * .antMatchers(HttpMethod.POST, "/salvarAcesso", "/deleteAcesso");
+		 */
+
+		// Ingnorando URL no momento para nao autenticar
+	}
+	 
 }
