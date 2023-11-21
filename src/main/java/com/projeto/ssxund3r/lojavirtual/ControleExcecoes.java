@@ -22,6 +22,16 @@ import com.projeto.ssxund3r.lojavirtual.dto.ObjetoErroDTO;
 @ControllerAdvice
 public class ControleExcecoes extends ResponseEntityExceptionHandler {
 	
+	@ExceptionHandler(ExceptionProjetoLojaVirtualJava.class)
+	public ResponseEntity<Object> handleExceptionCustom (ExceptionProjetoLojaVirtualJava ex){
+		
+		ObjetoErroDTO objetoErroDTO = new ObjetoErroDTO();
+		
+		objetoErroDTO.setError(ex.getMessage());
+		objetoErroDTO.setCode(HttpStatus.OK.toString().toString());
+		
+		return new ResponseEntity<Object>(objetoErroDTO, HttpStatus.OK);
+	}
 	
 	//Captura Excecoes no projeto
 	@ExceptionHandler({Exception.class, RuntimeException.class, Throwable.class, NullPointerException.class})

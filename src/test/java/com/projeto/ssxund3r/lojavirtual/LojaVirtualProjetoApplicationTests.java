@@ -165,7 +165,7 @@ class LojaVirtualProjetoApplicationTests extends TestCase {
 	}
 	
 	@Test
-	void testCadastraAcesso() {
+	void testCadastraAcesso() throws ExceptionProjetoLojaVirtualJava {
 		Acesso acesso = new Acesso();
 
 		acesso.setDescricao("ROLE_ADMIN");
