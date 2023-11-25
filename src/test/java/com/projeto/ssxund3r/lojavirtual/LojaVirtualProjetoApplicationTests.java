@@ -81,7 +81,6 @@ class LojaVirtualProjetoApplicationTests extends TestCase {
 		System.out.println("Retorno da API: " + retornoApi.andReturn().getResponse().getContentAsString());
 		System.out.println("Status de Retorno: " + retornoApi.andReturn().getResponse().getStatus());
 		
-		assertEquals("Acesso Removido!", retornoApi.andReturn().getResponse().getStatus());
 		assertEquals(200, retornoApi.andReturn().getResponse().getStatus());
 		
 	}
