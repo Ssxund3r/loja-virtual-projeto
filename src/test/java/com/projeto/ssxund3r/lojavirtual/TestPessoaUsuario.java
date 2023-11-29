@@ -1,34 +1,32 @@
 package com.projeto.ssxund3r.lojavirtual;
 
-import org.junit.Test;
+import java.util.Calendar;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 
+import com.projeto.ssxund3r.lojavirtual.controller.PessoaController;
 import com.projeto.ssxund3r.lojavirtual.model.PessoaJuridica;
-import com.projeto.ssxund3r.lojavirtual.repository.PessoaRepository;
-import com.projeto.ssxund3r.lojavirtual.service.PessoaUserService;
 
 import junit.framework.TestCase;
 
 @Profile("test")
 @SpringBootTest(classes = LojaVirtualProjetoApplication.class)
-public class TestPessoaUsuario extends TestCase {
+class TestPessoaUsuario extends TestCase {
 	
 	@Autowired
-	private PessoaUserService pessoaUserService;
-	
-	@Autowired
-	private PessoaRepository pessoaRepository;
+	private PessoaController pessoaController;
 	
 	@Test
-	public void testCadPessoaFisica() {
+	void testCadPessoaFisica() throws ExceptionProjetoLojaVirtualJava {
 		
 		PessoaJuridica pessoaJuridica = new PessoaJuridica();
 		
-		pessoaJuridica.setCnpj("12345698710001");
+		pessoaJuridica.setCnpj("" + Calendar.getInstance().getTimeInMillis());
 		pessoaJuridica.setNome("Binho da Costa");
-		pessoaJuridica.setEmail("binho.morro@gmail.com");
+		pessoaJuridica.setEmail("palmeiras.naoTemMundial@gmail.com");
 		pessoaJuridica.setTelefone("516924870010");
 		pessoaJuridica.setInscEstadual("5246859712300015");
 		pessoaJuridica.setInscMunicipal("25654821540050");
@@ -36,17 +34,9 @@ public class TestPessoaUsuario extends TestCase {
 		pessoaJuridica.setRazaoSocial("SENHOR DOS ANEIS S.A");
 		pessoaJuridica.setEmpresa(pessoaJuridica);
 		
-		pessoaRepository.save(pessoaJuridica);
+		pessoaController.salvarPj(pessoaJuridica);
 		
-		/*
-		 * PessoaFisica pessoaFisica = new PessoaFisica();
-		 * 
-		 * pessoaFisica.setCpf("12345698755");
-		 * pessoaFisica.setNome("Gabriel Filipe da Costa");
-		 * pessoaFisica.setEmail("gabriel.fcosta@hotmail.com");
-		 * pessoaFisica.setTelefone("5198788354407");
-		 * pessoaFisica.setEmpresa(pessoaFisica);
-		 */
+	
 		 
 	}
 	
