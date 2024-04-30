@@ -208,5 +208,23 @@ class LojaVirtualProjetoApplicationTests extends TestCase {
 
 		acessoRepository.deleteById(acesso.getId());
 	}
+	
+	@Test
+	void testCadastraAcessoRoleAdmin() throws ExceptionProjetoLojaVirtualJava {
+		Acesso acesso = new Acesso();
+
+		acesso.setDescricao("ROLE_ADMIN");
+
+		assertEquals(true, acesso.getId() == null);
+
+		/* Gravou no banco de dados */
+		acesso = acessoController.salvarAcesso(acesso).getBody();
+
+		assertEquals(true, acesso.getId() > 0);
+
+		/* Validar os dados na forma correta */
+		assertEquals("ROLE_ADMIN", acesso.getDescricao());
+
+	}
 
 }
