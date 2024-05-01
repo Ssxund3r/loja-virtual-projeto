@@ -1,7 +1,5 @@
 package com.projeto.ssxund3r.lojavirtual.service;
 
-import javax.mail.PasswordAuthentication;
-
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
@@ -9,6 +7,7 @@ import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class ServiceSendEmail {
 	
 	private String userName = "projetolojavirtual98@gmail.com";
-	private String senha = "Gremio@123#456";
+	private String senha = "bxog vmlv wksh iidc";
 	
 	@Async
 	public void enviarEmailHtml(String assunto, String mensagem, String emailDestino) throws UnsupportedEncodingException, MessagingException {
@@ -46,13 +45,13 @@ public class ServiceSendEmail {
 		
 		session.setDebug(true);
 		
-		Address[] toUser = InternetAddress.parse(emailDestino);
+		Address[] toUser = InternetAddress.parse(emailDestino, "gabrielfillip@gmail.com");
 		
 		Message message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(userName, "Gabriel", "UTF-8"));
 		message.setRecipients(Message.RecipientType.TO, toUser);
 		message.setSubject(assunto);
-		message.setContent(message, "text/html; charset=utf-8");
+		message.setContent(mensagem, "text/html; charset=utf-8");
 		
 		Transport.send(message);
 

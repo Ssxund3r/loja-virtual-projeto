@@ -26,7 +26,7 @@ public class PessoaUserService {
 	
 	@Autowired
 	private ServiceSendEmail serviceSendEmail;
-
+	
 	public PessoaJuridica salvarPessoaJuridica(PessoaJuridica pessoaJuridica) {
 		
 		for(int i = 0; i < pessoaJuridica.getEnderecos().size(); i++) {
@@ -62,20 +62,21 @@ public class PessoaUserService {
 			usuarioPj = usuarioRepository.save(usuarioPj);
 			
 			usuarioRepository.insereAcessoUserPj(usuarioPj.getId());
+			//usuarioRepository.insereAcessoUserPj(usuarioPj.getId(), "ROLE_ADMIN");
 			
-			StringBuilder mensagemHtml = new StringBuilder();
 			
-			mensagemHtml.append("<b>Segue abaixo seus dados de acesso para a loja virtual</b><br/>");
-			mensagemHtml.append("<b>Login: </b>"+pessoaJuridica.getEmail()+"<br/>");
-			mensagemHtml.append("<b>Senha: </b>").append(senha).append("<br/><br/>");
-			mensagemHtml.append("Obrigado!");
-			
-			try {
-				serviceSendEmail.enviarEmailHtml("Acesso Gerado Loja Virtual", mensagemHtml.toString(),
-						pessoaJuridica.getEmail());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			  StringBuilder mensagemHtml = new StringBuilder();
+			  
+			  mensagemHtml.
+			  append("<b>Segue abaixo seus dados de acesso para a loja virtual</b><br/>");
+			  mensagemHtml.append("<b>Login: </b>"+pessoaJuridica.getEmail()+"<br/>");
+			  mensagemHtml.append("<b>Senha: </b>").append(senha).append("<br/><br/>");
+			  mensagemHtml.append("Obrigado!");
+			  
+			  try { serviceSendEmail.enviarEmailHtml("Acesso Gerado Loja Virtual",
+			  mensagemHtml.toString(), pessoaJuridica.getEmail()); } catch (Exception e) {
+			  e.printStackTrace(); }
+			 
 		}
 		
 		return pessoaJuridica;

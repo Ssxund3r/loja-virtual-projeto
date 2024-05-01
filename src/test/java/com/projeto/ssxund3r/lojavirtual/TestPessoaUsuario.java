@@ -28,7 +28,7 @@ class TestPessoaUsuario extends TestCase {
 		
 		pessoaJuridica.setCnpj("" + Calendar.getInstance().getTimeInMillis());
 		pessoaJuridica.setNome("Cleber Alves Machado");
-		pessoaJuridica.setEmail("tata.raiz@gmail.com");
+		pessoaJuridica.setEmail("projetolojavirtual98@gmail.com");
 		pessoaJuridica.setTelefone("516924870010");
 		pessoaJuridica.setInscEstadual("5246859712300015");
 		pessoaJuridica.setInscMunicipal("25654821540050");
