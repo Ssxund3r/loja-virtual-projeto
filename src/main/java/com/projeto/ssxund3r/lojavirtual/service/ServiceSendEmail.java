@@ -45,7 +45,7 @@ public class ServiceSendEmail {
 		
 		session.setDebug(true);
 		
-		Address[] toUser = InternetAddress.parse(emailDestino, "gabrielfillip@gmail.com");
+		Address[] toUser = InternetAddress.parse(emailDestino);
 		
 		Message message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(userName, "Gabriel", "UTF-8"));
