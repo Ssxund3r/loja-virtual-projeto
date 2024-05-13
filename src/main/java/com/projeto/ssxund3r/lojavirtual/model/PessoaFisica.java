@@ -8,6 +8,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "pessoa_fisica")
@@ -21,6 +22,17 @@ public class PessoaFisica extends Pessoa {
 
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
+	
+	@Transient
+	private String senhaTemp;
+	
+	public String getSenhaTemp() {
+		return senhaTemp;
+	}
+	
+	public void setSenhaTemp(String senhaTemp) {
+		this.senhaTemp = senhaTemp;
+	}
 
 	public String getCpf() {
 		return cpf;
